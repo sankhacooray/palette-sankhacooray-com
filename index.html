@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>palette — Sankha Cooray · interface design</title>
+<meta name="description" content="UI and interaction design work by Sankha Cooray — small web apps, design systems, and the visual vocabulary behind a network of side projects.">
+<link rel="canonical" href="https://palette.sankhacooray.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="palette">
+<meta property="og:title" content="palette — Sankha Cooray · interface design">
+<meta property="og:description" content="UI and interaction design work — small web apps, design systems, and the visual vocabulary behind a network of side projects.">
+<meta property="og:url" content="https://palette.sankhacooray.com/">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="palette — Sankha Cooray · interface design">
+<meta name="twitter:description" content="UI and interaction design work — small web apps, design systems, and the visual vocabulary behind a network of side projects.">
+
+<meta name="theme-color" content="#0d0a14">
+
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0d0a14;
+  --surface: #181425;
+  --surface2: #221c33;
+  --border: #312942;
+  --border-soft: #261f38;
+  --text: #f0ebe0;
+  --text-dim: #a09aae;
+  --text-muted: #6b6582;
+  --gold: #e07ab8;        /* magenta — primary accent */
+  --gold-dim: #a8568a;
+  --gold-soft: rgba(224,122,184,0.08);
+  --cyan: #a98bff;        /* violet — secondary accent */
+  --cyan-dim: #7a64bf;
+  --cyan-soft: rgba(169,139,255,0.08);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --maxw: 1080px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(800px 400px at 20% -10%, rgba(224,122,184,0.07), transparent 60%),
+    radial-gradient(700px 500px at 100% 20%, rgba(169,139,255,0.05), transparent 60%);
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+a { color: inherit; text-decoration: none; }
+
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  background: rgba(13,10,20,0.7);
+  border-bottom: 1px solid var(--border-soft);
+}
+.site-header .inner {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 18px 28px;
+  display: flex; align-items: center; gap: 32px;
+}
+.brand { display: flex; align-items: baseline; gap: 10px; }
+.brand-mark {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px; color: var(--gold); letter-spacing: -0.5px;
+}
+.brand-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 1.5px;
+}
+.nav { margin-left: auto; display: flex; gap: 24px; font-size: 14px; color: var(--text-dim); }
+.nav a:hover { color: var(--text); }
+@media (max-width: 640px) { .nav { display: none; } }
+
+.hero { max-width: var(--maxw); margin: 0 auto; padding: 120px 28px 80px; }
+.hero .eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--gold);
+  text-transform: uppercase; letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(44px, 7vw, 84px); line-height: 1.05;
+  letter-spacing: -1.5px; color: var(--text); margin-bottom: 28px;
+}
+.hero h1 em { color: var(--gold); font-style: italic; }
+.hero .lede { font-size: 19px; color: var(--text-dim); max-width: 640px; margin-bottom: 40px; }
+.hero .meta {
+  display: flex; flex-wrap: wrap; gap: 8px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--text-muted);
+}
+.hero .meta span::before { content: "◦"; margin-right: 10px; color: var(--gold-dim); }
+
+.section {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 72px 28px;
+  border-top: 1px solid var(--border-soft);
+}
+.section-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px; }
+.section-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); letter-spacing: 1px; }
+.section h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 36px; letter-spacing: -0.5px; }
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.about-grid p { font-size: 16px; color: var(--text-dim); }
+.about-grid p + p { margin-top: 16px; }
+.about-grid strong { color: var(--text); font-weight: 500; }
+.about-grid .accent { color: var(--gold); }
+@media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.card {
+  background: var(--surface); border: 1px solid var(--border-soft);
+  border-radius: var(--radius); padding: 22px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: var(--border); transform: translateY(-2px); }
+.card .role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--gold);
+  letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px;
+}
+.card .role.cool { color: var(--cyan); }
+.card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px; font-weight: 400; margin-bottom: 6px; letter-spacing: -0.2px;
+}
+.card .where { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+.card p { font-size: 14px; color: var(--text-dim); }
+.card .link {
+  margin-top: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--gold); letter-spacing: 1px;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.card .link.cool { color: var(--cyan); }
+.card .link::after { content: "→"; transition: transform 0.2s; }
+.card .link:hover::after { transform: translateX(3px); }
+.card .link.muted { color: var(--text-muted); pointer-events: none; }
+.card .link.muted::after { content: "·"; }
+
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.principle {
+  background: var(--surface); border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm); padding: 18px;
+  display: flex; align-items: flex-start; gap: 14px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.principle:hover { border-color: var(--gold-dim); background: var(--surface2); }
+.principle .glyph {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--gold);
+  flex-shrink: 0;
+}
+.principle .body { flex: 1; min-width: 0; }
+.principle .name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.principle .desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+.research-intro {
+  font-size: 17px; color: var(--text-dim);
+  max-width: 680px; margin-bottom: 36px;
+}
+.research-intro .cyan { color: var(--cyan); }
+
+.swatches { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
+.swatch {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface); border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm); padding: 10px 14px;
+}
+.swatch .chip { width: 22px; height: 22px; border-radius: 6px; border: 1px solid var(--border); }
+.swatch .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); }
+
+.note {
+  margin-top: 24px;
+  font-size: 13px; color: var(--text-muted); font-style: italic;
+  padding-left: 12px; border-left: 2px solid var(--border);
+}
+
+footer {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 60px 28px 80px;
+  border-top: 1px solid var(--border-soft); margin-top: 40px;
+  display: flex; flex-wrap: wrap; gap: 24px; align-items: baseline;
+  font-size: 13px; color: var(--text-muted);
+}
+footer .mark { font-family: 'Instrument Serif', serif; color: var(--gold); font-size: 20px; }
+footer .links { margin-left: auto; display: flex; gap: 20px; }
+footer .links a:hover { color: var(--text); }
+
+.tag {
+  display: inline-block; padding: 3px 10px; border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+  border: 1px solid var(--gold-dim); color: var(--gold); background: var(--gold-soft);
+}
+.tag.cool { border-color: var(--cyan-dim); color: var(--cyan); background: var(--cyan-soft); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <div class="brand">
+      <span class="brand-mark">palette</span>
+      <span class="brand-tag">sankha cooray</span>
+    </div>
+    <nav class="nav">
+      <a href="#about">about</a>
+      <a href="#work">work</a>
+      <a href="#principles">principles</a>
+      <a href="#system">system</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">interface design · a working portfolio</div>
+  <h1>Small surfaces,<br>chosen with <em>care</em>.</h1>
+  <p class="lede">
+    UI and interaction design for the network of small web apps I make on the side.
+    Every project is a chance to choose a typeface, a colour set, a rhythm — and to ship.
+  </p>
+  <div class="meta">
+    <span>Singapore</span>
+    <span>self-taught designer</span>
+    <span>shipping on weekends</span>
+  </div>
+</section>
+
+<!-- ─── ABOUT ───────────────────────────────────────────── -->
+<section class="section" id="about">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2>About</h2>
+  </div>
+  <div class="about-grid">
+    <div>
+      <p>
+        I'm an engineer who keeps wandering into the design side. Most of what I build is
+        a <strong>small, opinionated web app</strong> — a one-page site, a single-file tool,
+        a deliberate visual moment. The constraint is what makes it fun.
+      </p>
+      <p>
+        My instinct is to <strong class="accent">design the system before the screen</strong>:
+        pick a palette, settle on a type pairing, decide what the headers should feel like,
+        and only then start placing buttons.
+      </p>
+    </div>
+    <div>
+      <p>
+        I think of this site as a <strong>working portfolio</strong> — projects ship at the
+        same domain they're designed at, so what you see here is what's running in
+        production somewhere.
+      </p>
+      <p>
+        Some of the work is product-shaped (a coffee builder, a payment-link sandbox).
+        Some is research-shaped (gesture-driven instruments). All of it shares the same
+        small-batch, single-file aesthetic.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WORK ────────────────────────────────────────────── -->
+<section class="section" id="work">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2>Selected Work</h2>
+    <span class="tag">live</span>
+  </div>
+
+  <div class="card-grid">
+
+    <a class="card" href="https://coffeelab.sankhacooray.com" target="_blank" rel="noopener">
+      <div class="role">product · single page</div>
+      <h3>coffeelab</h3>
+      <div class="where">coffeelab.sankhacooray.com</div>
+      <p>
+        Visual lab for building coffee drinks — drop ingredients into a virtual cup
+        and watch which famous coffee you just made.
+      </p>
+      <span class="link">visit</span>
+    </a>
+
+    <a class="card" href="https://mixlab.sankhacooray.com" target="_blank" rel="noopener">
+      <div class="role">product · single page</div>
+      <h3>mixlab</h3>
+      <div class="where">mixlab.sankhacooray.com</div>
+      <p>
+        Food-experiments scratch pad. Plate combinations, ingredient noodling,
+        the visual side of cooking trials.
+      </p>
+      <span class="link">visit</span>
+    </a>
+
+    <a class="card" href="https://ensemble.sankhacooray.com" target="_blank" rel="noopener">
+      <div class="role cool">portfolio · sister site</div>
+      <h3>ensemble</h3>
+      <div class="where">ensemble.sankhacooray.com</div>
+      <p>
+        The music-journey site. Dark warm theme, Instrument Serif headlines, timeline
+        of concerts. Same family as this page.
+      </p>
+      <span class="link cool">visit</span>
+    </a>
+
+    <a class="card" href="https://eo.sankhacooray.com" target="_blank" rel="noopener">
+      <div class="role cool">experiment</div>
+      <h3>embodied orchestra</h3>
+      <div class="where">eo.sankhacooray.com</div>
+      <p>
+        Gesture-driven mini-orchestra in the browser — theremin, bow, and
+        scale-banded instruments controlled by the body. Interface design for an
+        interface without buttons.
+      </p>
+      <span class="link cool">visit</span>
+    </a>
+
+    <a class="card" href="https://paynow.sankhacooray.com" target="_blank" rel="noopener">
+      <div class="role">tool · sandbox</div>
+      <h3>paynow</h3>
+      <div class="where">paynow.sankhacooray.com</div>
+      <p>
+        Tap-test sandbox for Singapore payment-app deep links. A utility page that
+        still earns a typography pass.
+      </p>
+      <span class="link">visit</span>
+    </a>
+
+    <div class="card">
+      <div class="role">case studies</div>
+      <h3>Process write-ups</h3>
+      <div class="where">coming to this page</div>
+      <p>
+        Per-project breakdowns — colour decisions, type pairings, why the dark
+        theme, what got cut. To be added as each project earns a write-up.
+      </p>
+      <span class="link muted">to be added</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── PRINCIPLES ──────────────────────────────────────── -->
+<section class="section" id="principles">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2>House Style</h2>
+  </div>
+
+  <p class="research-intro">
+    A handful of decisions I keep making, project after project. Not rules —
+    just the path of least friction once you've made them once.
+  </p>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="glyph">Aa</div>
+      <div class="body">
+        <div class="name">Serif headlines, sans body</div>
+        <div class="desc">Instrument Serif for warmth, DM Sans for legibility, JetBrains Mono for metadata.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="glyph">◐</div>
+      <div class="body">
+        <div class="name">Dark base, two accents</div>
+        <div class="desc">Warm dark background, one primary hue, one cool counterpart. Lets content breathe.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="glyph">▢</div>
+      <div class="body">
+        <div class="name">One page, one file</div>
+        <div class="desc">Single-file HTML where possible. No build step, no JS framework, no excuses.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="glyph">·</div>
+      <div class="body">
+        <div class="name">Generous whitespace</div>
+        <div class="desc">Sections breathe. The page should feel like a small magazine, not a dashboard.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="glyph">◦</div>
+      <div class="body">
+        <div class="name">Numbered sections</div>
+        <div class="desc">A monospace 01 / 02 / 03 gives the page rhythm and orientation without a sidebar.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="glyph">↗</div>
+      <div class="body">
+        <div class="name">Link as gesture</div>
+        <div class="desc">Arrow on hover, mono label. Links should feel like deliberate moves, not chrome.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SYSTEM ──────────────────────────────────────────── -->
+<section class="section" id="system">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2>This Site's Palette</h2>
+    <span class="tag cool">live tokens</span>
+  </div>
+
+  <p class="research-intro">
+    Every site in the network keeps the same structural skeleton and shifts only its
+    <span class="cyan">accent pair</span>. This page leans magenta &amp; violet — the design-studio
+    register of the family.
+  </p>
+
+  <div class="swatches">
+    <div class="swatch"><span class="chip" style="background:#0d0a14"></span><span class="label">bg · #0d0a14</span></div>
+    <div class="swatch"><span class="chip" style="background:#181425"></span><span class="label">surface · #181425</span></div>
+    <div class="swatch"><span class="chip" style="background:#e07ab8"></span><span class="label">primary · #e07ab8</span></div>
+    <div class="swatch"><span class="chip" style="background:#a98bff"></span><span class="label">secondary · #a98bff</span></div>
+    <div class="swatch"><span class="chip" style="background:#f0ebe0"></span><span class="label">text · #f0ebe0</span></div>
+  </div>
+
+  <p class="note">
+    Case studies, before/after frames, and Figma exports will be added here as the
+    portfolio fills in.
+  </p>
+</section>
+
+<footer>
+  <span class="mark">palette</span>
+  <span>&copy; 2026 Sankha Cooray · interface design, in progress</span>
+  <div class="links">
+    <a href="https://sankhacooray.com" target="_blank" rel="noopener">main site</a>
+    <a href="https://ensemble.sankhacooray.com" target="_blank" rel="noopener">ensemble</a>
+  </div>
+</footer>
+
+</body>
+</html>
