@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0d0a14;
+    color: #f0ebe0;
+    background-image:
+      radial-gradient(900px 460px at 16% -8%, rgba(224,122,184,0.14), transparent 60%),
+      radial-gradient(820px 560px at 104% 18%, rgba(169,139,255,0.12), transparent 60%);
+    padding: 72px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 500;
+    color: #e07ab8; text-transform: uppercase; letter-spacing: 4px;
+  }
+  h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: 96px; line-height: 1.02; letter-spacing: -2px; margin-top: 28px;
+  }
+  h1 em { color: #e07ab8; font-style: italic; }
+  .lede {
+    font-size: 25px; color: #a99bb5; max-width: 720px; margin-top: 30px; line-height: 1.45;
+  }
+  .foot { display: flex; align-items: baseline; gap: 18px; }
+  .mark { font-family: 'Instrument Serif', serif; font-size: 40px; color: #e07ab8; letter-spacing: -0.5px; }
+  .by { font-family: 'JetBrains Mono', monospace; font-size: 17px; color: #6b6582; letter-spacing: 1px; }
+  .url { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 17px; color: #a99bb5; letter-spacing: 1px; }
+  .swatches { position: absolute; right: 70px; top: 90px; opacity: 0.9; }
+</style>
+</head>
+<body>
+  <svg class="swatches" width="320" height="120" viewBox="0 0 320 120">
+    <rect x="8" y="30" width="60" height="60" rx="14" fill="#a98bff" opacity="0.85"/>
+    <rect x="78" y="30" width="60" height="60" rx="14" fill="#e07ab8" opacity="0.85"/>
+    <rect x="148" y="30" width="60" height="60" rx="14" fill="#a98bff" opacity="0.55"/>
+    <rect x="218" y="30" width="60" height="60" rx="14" fill="#e07ab8" opacity="0.4"/>
+  </svg>
+
+  <div>
+    <div class="eyebrow">ui · interaction · systems</div>
+    <h1>The visual vocabulary<br>behind the <em>network</em>.</h1>
+    <div class="lede">UI and interaction design — small web apps, design systems, and the look of a network of side projects.</div>
+  </div>
+
+  <div class="foot">
+    <span class="mark">palette</span>
+    <span class="by">Sankha Cooray</span>
+    <span class="url">palette.sankhacooray.com</span>
+  </div>
+</body>
+</html>
